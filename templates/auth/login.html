@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Reddit2 - Login</title>
+<style>
+    body {
+        background: #dae0e6 !important;
+        margin-top: 200px !important;
+    }
+
+    .form-control {
+        margin-bottom: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Sign Up
+                </div>
+                <div class="card-body">
+                    <form class="form" action="/login" method="POST">
+                        <input class="form-control" name="username" type="text" placeholder="Username">
+                        <input class="form-control" name="password" type="password" placeholder="Password">
+                        <br>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock %}
