@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Reddit2 - Account</title>
+<style>
+    body {
+    background: #dae0e6 !important;
+    margin-top: 75px !important;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light style=" style="background-color: #fff !important;">
+    <div class="container">
+        <a class="navbar-brand" href="/">Reddit2</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="mx-2 my-auto d-inline w-100" style="margin-left: 100px !important; margin-right: 100px !important;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item btn btn-outline-primary mx-2" href="/logout">Logout</a>
+                <a class="nav-item btn btn-primary" href="/account">Account</a>
+                <a href="/account">
+                    <img class="rounded-circle account-img" src="static/profilePics/{{ current_user.profilePicture }}" height="40" width="40" hspace="10">
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="content-section">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Update Account Info
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ form.username.label(class="form-control-label") }}
+
+                                {% if form.username.errors %}
+                                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.username.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.username(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.label(class="form-control-label") }}
+                                {% if form.email.errors %}
+                                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.email(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.avatar.label() }}
+                                {{ form.avatar(class="form-control-file") }}
+                                {% if form.avatar.errors %}
+                                    {% for error in form.avatar.errors %}
+                                        <span class="text-danger">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-outline-info") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    User
+                </div>
+                <div class="card-body">
+                    <div class="media">
+                        <img class="rounded-circle account-img" src="static/profilePics/{{ current_user.profilePicture }}" height="80" width="80" hspace="10">
+                        <div class="media-body">
+                          <h2 class="account-heading">{{ current_user.username }}</h2>
+                          <p class="text-secondary">{{ current_user.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
