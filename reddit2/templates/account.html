@@ -2,16 +2,16 @@
 
 {% block head %}
 <title>Reddit2 - Account</title>
-<style>
+<!-- <style>
     body {
     background: #dae0e6 !important;
     margin-top: 75px !important;
 }
-</style>
+</style> -->
 {% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light style=" style="background-color: #fff !important;">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">Reddit2</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -34,8 +34,7 @@
 </nav>
 <div class="content-section">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     Update Account Info
@@ -82,7 +81,7 @@
                             </div>
                         </fieldset>
                         <div class="form-group">
-                            {{ form.submit(class="btn btn-outline-info") }}
+                            {{ form.submit(class="btn btn-primary") }}
                         </div>
                     </form>
                 </div>

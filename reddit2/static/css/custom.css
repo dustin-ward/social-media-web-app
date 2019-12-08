@@ -1,0 +1,43 @@
+body {
+    background: #212224;
+    margin-top: 75px;
+}
+
+.navbar {
+    background-color: #111111;
+}
+
+.navbar-brand {
+    color: #eeeeee;
+}
+
+.form-control {
+    background-color: #222222;
+    border-color: #999999
+}
+
+.btn-primary {
+    color: #dddddd;
+    background-color: #333333;
+    border-color: #999999
+}
+
+.btn-outline-primary {
+    color: #dddddd;
+    border-color: #999999
+}
+
+.card {
+    color: #eeeeee;
+    background-color: #333333;
+    border-color: #999999
+}
+
+.card-header {
+    color: #eeeeee;
+    background-color: #111111;
+}
+
+.card-title {
+    margin-bottom: 0;
+}
