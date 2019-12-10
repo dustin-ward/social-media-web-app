@@ -39,5 +39,27 @@ body {
 }
 
 .card-title {
+    color: #eeeeee;
     margin-bottom: 0;
+}
+
+.card-title:hover {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+.modal-content {
+    background-color: #333333;
+}
+
+.modal-open {
+    color: #eeeeee;
+}
+
+.modal-header {
+    border-top: #333333;
+}
+
+.modal-footer {
+    border-bottom: #333333;
 }

@@ -1,23 +1,13 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Reddit2 - Create A Post</title>
-<!-- <style>
-    body {
-        background: #dae0e6 !important;
-        margin-top: 200px !important;
-    }
-
-    .form-control {
-        margin-bottom: 5px;
-    }
-</style> -->
+<!-- <title>Reddit2 - Create A Post</title> -->
 {% endblock %}
 
 {% block body %}
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/">Reddit2</a>
+        <a class="navbar-brand" href="/" style="color: #ffffff !important;">Reddit2</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,11 +17,16 @@
         </form>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-                <a class="nav-item btn btn-outline-primary mx-2" href="/logout">Logout</a>
-                <a class="nav-item btn btn-primary" href="/account">Account</a>
-                <a href="/account">
-                    <img class="rounded-circle account-img" src="static/profilePics/{{ current_user.profilePicture }}" height="40" width="40" hspace="10">
-                </a>
+                {% if current_user.is_authenticated %}
+                    <a class="nav-item btn btn-outline-primary mx-2" href="/logout">Logout</a>
+                    <a class="nav-item btn btn-primary" href="/account">Account</a>
+                    <a href="/account">
+                        <img class="rounded-circle account-img" src="{{ url_for('static', filename='profilePics/' + current_user.profilePicture) }}" height="40" width="40" hspace="10">
+                    </a>
+                {% else %}
+                    <a class="nav-item btn btn-outline-primary mx-2" href="/login">Login</a>
+                    <a class="nav-item btn btn-primary" href="/signup">Signup</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -41,7 +36,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Create Post
+                    {{ legend }}
                 </div>
                 <div class="card-body">
                     <form method="POST" action="">

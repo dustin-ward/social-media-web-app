@@ -1,6 +1,6 @@
 import os
 import secrets
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from PIL import Image
 from reddit2 import app, db, bcrypt
@@ -12,7 +12,7 @@ from reddit2.password import *
 @app.route('/')
 @app.route('/home')
 def index():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.dateCreated.desc()).all()
     return render_template('index.html', posts=posts)
 
 
@@ -93,4 +93,39 @@ def post():
         db.session.commit()
         flash('Your post has been published!', 'success')
         return redirect('/')
-    return render_template('post.html', form=form)
+    return render_template('post.html', title='Reddit2 - Create A Post',
+                            legend='Create A Post', form=form)
+
+@app.route('/post/<int:postId>')
+def viewPost(postId):
+    post = Post.query.get_or_404(postId)
+    return render_template('viewPost.html', post=post)
+
+@app.route('/post/<int:postId>/edit', methods=['GET', 'POST'])
+def editPost(postId):
+    post = Post.query.get_or_404(postId)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.body = form.content.data
+        post.edited = True
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('viewPost', postId=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.body
+    return render_template('post.html', title='Reddit2 - Edit Post',
+                            legend='Edit Post', form=form)
+
+@app.route('/post/<int:postId>/delete', methods=['POST'])
+def deletePost(postId):
+    post = Post.query.get_or_404(postId)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post was deleted :/')
+    return redirect('/')

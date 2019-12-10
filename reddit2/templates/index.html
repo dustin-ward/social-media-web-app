@@ -2,12 +2,6 @@
 
 {% block head %}
 <title>Reddit2</title>
-<!-- <style>
-    body {
-    background: #212224 !important;
-    margin-top: 75px !important;
-}
-</style> -->
 {% endblock %}
 
 {% block body %}
@@ -53,14 +47,17 @@
                             </button>
                         </strong> r/subreddit •<span class="text-muted" style="font-size: 10pt;"> Posted by {{ post.author.username }}</span>
                         <img class="rounded-circle account-img" src="static/profilePics/{{ post.author.profilePicture }}" height="20" width="20" hspace="2">
-                        <h3 class="card-title">{{ post.title }}</h3>
+                        {% if post.edited %}
+                            <i class="text-muted" style="font-size: 10pt;">Edited</i>
+                        {% endif %}
+                        <h3 class="card-title"><a href="post/{{ post.id }}" class="card-title">{{ post.title }}</a></h3>
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ post.body }}</p>
                         <span class="text-muted" style="font-size: 8pt;">Posted on {{ post.dateCreated.strftime('%Y-%m-%d') }}</span>
                     </div>
                     <div class="card-footer text-muted">
-                        <a href="" class="btn btn-light btn-sm"><i class="fas fa-comment"></i> 0 Comments</a>
+                        <a href="/post/{{ post.id }}" class="btn btn-light btn-sm"><i class="fas fa-comment"></i> 0 Comments</a>
                         <a href="" class="btn btn-light btn-sm"><i class="fas fa-share"></i> Share</a>
                     </div>
                 </div>
