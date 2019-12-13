@@ -3,6 +3,14 @@ body {
     margin-top: 75px;
 }
 
+a {
+    color: #eeeeee;
+}
+
+a:hover {
+    color: #a2ff00;
+}
+
 .navbar {
     background-color: #111111;
 }
@@ -16,6 +24,17 @@ body {
     border-color: #999999
 }
 
+input {
+    color: #eeeeee;
+    background-color: #222222;
+    border-color: #999999
+}
+
+input:-internal-autofill-selected {
+    background-color: #222222;
+    border-color: #999999
+}
+
 .btn-primary {
     color: #dddddd;
     background-color: #333333;
@@ -25,6 +44,16 @@ body {
 .btn-outline-primary {
     color: #dddddd;
     border-color: #999999
+}
+
+.btn-primary:hover {
+    background-color: #a2ff00;
+    border-color: #999999;
+}
+
+.btn-outline-primary:hover {
+    background-color: #a2ff00;
+    border-color: #999999;
 }
 
 .card {

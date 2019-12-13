@@ -12,7 +12,8 @@ from reddit2.password import *
 @app.route('/')
 @app.route('/home')
 def index():
-    posts = Post.query.order_by(Post.dateCreated.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.dateCreated.desc()).paginate(page=page, per_page=5)
     return render_template('index.html', posts=posts)
 
 
@@ -65,9 +66,11 @@ def savePicture(form_picture):
     i.save(picturePath)
     return pictureFilename
 
-@app.route('/account', methods=['GET', 'POST'])
-@login_required
-def account():
+@app.route('/u/<string:username>', methods=['GET', 'POST'])
+def account(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = posts = Post.query.filter_by(author=user).order_by(Post.dateCreated.desc()).paginate(page=page, per_page=5)
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.avatar.data:
@@ -79,9 +82,9 @@ def account():
         flash('Your account info has been updated!', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-    return render_template('account.html', form=form)
+        form.username.data = user.username
+        form.email.data = user.email
+    return render_template('account.html', user=user, form=form, posts=posts)
 
 @app.route('/post', methods=['GET', 'POST'])
 @login_required
@@ -129,3 +132,10 @@ def deletePost(postId):
     db.session.commit()
     flash('Your post was deleted :/')
     return redirect('/')
+
+# @app.route('/u/<string:username>')
+# def userPage(username):
+#     page = request.args.get('page', 1, type=int)
+#     user = User.query.filter_by(username=username).first_or_404()
+#     posts = Post.query.order_by(Post.dateCreated.desc()).paginate(page=page, per_page=5)
+#     return render_template('userPage.html', posts=posts)

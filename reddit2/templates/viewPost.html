@@ -43,7 +43,7 @@
                         <button class="btn btn-light btn-sm">
                             <i class="fas fa-arrow-down"></i>
                         </button>
-                    </strong> r/subreddit •<span class="text-muted" style="font-size: 10pt;"> Posted by {{ post.author.username }}</span>
+                    </strong> r/subreddit •<span class="text-muted" style="font-size: 10pt;"> Posted by <a href="" class="text-muted">/u/{{ post.author.username }}</a></span>
                     <img class="rounded-circle account-img" src="{{ url_for('static', filename='profilePics/' + post.author.profilePicture) }}" height="20" width="20" hspace="2">
                     {% if post.edited %}
                         <i class="text-muted" style="font-size: 10pt;">Edited</i>
