@@ -16,6 +16,7 @@ gunicorn==20.0.4
 itsdangerous==1.1.0
 Jinja2==2.10.3
 MarkupSafe==1.1.1
+mysqlclient==1.4.6
 Pillow==6.2.1
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
