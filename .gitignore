@@ -1,2 +1,3 @@
 __pycache__/
 ENV/
+reddit2/config.py
